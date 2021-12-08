@@ -14,9 +14,9 @@ render(){
     return(
         <div className="Home">
         
-            {this.state.chars.map(char=>{ return <div key={char}><Selector character={char}/></div>})}
+            {(this.state.chars).map(char=>{ return <div key={char}><Selector character={char}/></div>})}
             
-            Hi
+            
         </div>
     );
 }

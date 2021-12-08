@@ -12,8 +12,8 @@ function App() {
     <Router>
     
       <Switch>
-        <Route exact path="/" component={Home}/>
-        {chars.map(char=>{ return <div key={char}><Route exact path={"/" + char[1]} component={<Character character={char[1]} />} /></div>})}
+        <Route exact path="/" render={(props)=><Home chars={chars}></Home>}/>
+        {chars.map(char=>{ return <Route exact path={"/" + char[1]} key={char} render={(props)=><Character character={char[1]} />} />})}
 
       </Switch>
     

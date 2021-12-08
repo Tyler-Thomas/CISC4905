@@ -31,7 +31,7 @@ class Selector extends Component {
 
                 </BrowserRouter>
 
-                Hello
+                
             </div>
         );
     }
