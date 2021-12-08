@@ -21,7 +21,7 @@ class Selector extends Component {
         return (
 
             <div>
-                <BrowserRouter>
+                
                     <div className="Char">
                         <Link to={"/" + this.state.charName[1]}>{this.state.charName[0]}</Link>
 
@@ -29,7 +29,7 @@ class Selector extends Component {
 
                     
 
-                </BrowserRouter>
+                
 
                 
             </div>
