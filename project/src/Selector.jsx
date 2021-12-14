@@ -13,17 +13,22 @@ class Selector extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            charName: this.props.character
+            charName: this.props.character,
+            charImage: './4905images/'+this.props.character[0]+'.png'
         }
     }
     render() {
-        
+        console.log(this.state.charImage)
         return (
 
-            <div>
+            <div className='Select'>
                 
-                    <div className="Char">
+                    <div className="Chars">
                         <Link to={"/" + this.state.charName[1]}>{this.state.charName[0]}</Link>
+
+                    </div>
+                    <div className='img'>
+                    <img className='Portrait' id="imgs" src={this.state.charImage} alt='No portrait'/>
 
                     </div>
 
