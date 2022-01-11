@@ -46,7 +46,17 @@
    width: 10%;
    height: 20%; 
  }
-
+ .histogram{
+   display: flex;
+   align-items: flex-end;
+   height: 500px;
+   margin-top: 0%;
+ }
+ .histobox{
+   width: 5%;
+   margin-left: 3%;
+   display: block;
+ }
  .backb{
    margin-left: 10%;
  }

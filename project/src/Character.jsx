@@ -22,6 +22,13 @@ render(){
         <div>
     {this.state.character} 
     </div>
+    <div className='histogram'>
+        <div className='histobox' style={{height:'10%',backgroundColor:'red'}}>1</div>
+        <div className='histobox' style={{height:'20%',backgroundColor:'orange'}}>2</div>
+        <div className='histobox' style={{height:'30%',backgroundColor:'yellow'}}>3</div>
+        <div className='histobox' style={{height:'40%',backgroundColor:'green'}}>4</div>
+        <div className='histobox' style={{height:'50%',backgroundColor:'blue'}}>5</div>
+    </div>
     </div>
   );
 }

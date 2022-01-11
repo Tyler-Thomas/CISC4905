@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.*;
 
 public class ProjectDB {
 
@@ -26,7 +27,7 @@ public class ProjectDB {
    catch(Exception E){ return -1;}
    }
 
-   public static int  login(String user){
+   public static int login(String user){
       Connection c = null;
       
       try {
@@ -61,6 +62,66 @@ public class ProjectDB {
    }
    catch(Exception e){return -1;}
    } 
+
+   public static HashMap<Integer,Integer> checkVote(String userID,int charID){
+      Connection c = null;
+      HashMap<Integer,Integer> output= new HashMap<>();
+      try {
+         Class.forName("org.sqlite.JDBC");
+         c = DriverManager.getConnection("jdbc:sqlite:FECommunityTierLists.db");
+         c.setAutoCommit(false);
+      } catch ( Exception e ) {
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+         System.exit(0);
+      }
+      try{
+         System.out.println("Opened database successfully");
+         Statement smt= c.createStatement();
+         ResultSet r= smt.executeQuery("Select * From Vote WHERE User='"+userID+"' AND Character='"+charID+"';");
+         while(r.next()){
+            output.put(Integer.valueOf(r.getString("VoteID")),Integer.valueOf(r.getString("VoteNum")));
+         }
+         
+         r.close();
+         smt.close();
+         c.close();
+         if(output.isEmpty())
+         output.put(0,0);
+         return output;
+      }
+      catch(Exception e){output.put(-1,-1); return output;}
+      } 
+
+      public static float getAverage(int character){
+         Connection c= null;
+         float avg=0;
+         try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:FECommunityTierLists.db");
+            c.setAutoCommit(false);
+         } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+         }
+         try{
+            System.out.println("Opened database successfully");
+            Statement smt= c.createStatement();
+            ResultSet r= smt.executeQuery("Select AVG(VoteNum) as avg From Vote WHERE Character='"+character+"';");
+            while(r.next()){
+               avg= (r.getFloat("avg"));
+            }
+            
+            r.close();
+            smt.close();
+            c.close();
+            
+            return avg;
+         }
+         catch(Exception e){ System.out.println(e.getMessage());return -1;}
+         } 
+      
+
+   
   public static void main( String args[] ) throws Exception{
      int flag;
       /**Connection c = null;
@@ -82,8 +143,9 @@ public class ProjectDB {
       }
    }
    catch(Exception e){System.out.println("Oops...");} **/
-   flag=login("Test2");
-   System.out.println(flag); 
+   
+   //System.out.println(checkVote("Test1",1).entrySet().toArray()[0]); 
+   System.out.println(getAverage(Integer.parseInt(args[0])));
 
    }
 }
