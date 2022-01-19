@@ -118,8 +118,137 @@ public class ProjectDB {
             return avg;
          }
          catch(Exception e){ System.out.println(e.getMessage());return -1;}
-         } 
-      
+         }
+      public static int addVote(String user, int character, int vote){
+         Connection c=null;
+         try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:FECommunityTierLists.db");
+            c.setAutoCommit(false);
+         } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+         }
+         try{
+            System.out.println("Opened database successfully");
+            Statement smt= c.createStatement();
+            String query="INSERT INTO Vote(Character,User,VoteNum) Values("+character+",'"+user+"',"+vote+");";
+            smt.executeUpdate(query);
+            smt.close();
+            c.commit();
+            Statement smt2=c.createStatement();
+            query="Update Character Set VoteAvg="+ getAverage(character) +" where CharacterID="+character+";";
+            smt2.executeUpdate(query);
+            smt2.close();
+            c.commit();
+            c.close();
+            return 1;
+         }
+         catch(Exception e){ 
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return -1;}
+         
+      }
+      public static int deleteVote(String user, int character){
+         Connection c=null;
+         try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:FECommunityTierLists.db");
+            c.setAutoCommit(false);
+         } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+         }
+         try{
+            System.out.println("Opened database successfully");
+            Statement smt= c.createStatement();
+            String query="Delete from Vote where User='"+user+"'AND Character="+character+";";
+            smt.executeUpdate(query);
+            smt.close();
+            c.commit();
+            Statement smt2=c.createStatement();
+            query="Update Character Set VoteAvg="+ getAverage(character) +" where CharacterID="+character+";";
+            smt2.executeUpdate(query);
+            smt2.close();
+            c.commit();
+            c.close();
+            return 1;
+         }
+         catch(Exception e){ 
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return -1;}
+         
+      }
+
+      public static int modifyVote(String user, int character, int vote){
+         Connection c=null;
+         try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:FECommunityTierLists.db");
+            c.setAutoCommit(false);
+         } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+         }
+         try{
+            System.out.println("Opened database successfully");
+            Statement smt= c.createStatement();
+            String query="Update Vote Set Character="+character+",User='"+user+"',VoteNum="+vote+" where User='"+user+"'AND Character="+character+";";
+            smt.executeUpdate(query);
+            smt.close();
+            c.commit();
+            Statement smt2=c.createStatement();
+            query="Update Character Set VoteAvg="+ getAverage(character) +" where CharacterID='"+character+"';";
+            smt2.executeUpdate(query);
+            smt2.close();
+            c.commit();
+            c.close();
+            return 1;
+         }
+         catch(Exception e){ 
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return -1;}
+         
+      }
+      public static VotesPair getVotes(int character){
+         Connection c=null;
+         try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:FECommunityTierLists.db");
+            c.setAutoCommit(false);
+         } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+         }
+         try{
+            int count=0;
+            System.out.println("Opened database successfully");
+            Statement smt= c.createStatement();
+            ResultSet r= smt.executeQuery("Select Count(*) as total From Vote WHERE Character='"+character+"';");
+            while(r.next()){
+                count= (r.getInt("total"));
+            }
+            
+            if(count==0){
+               r.close();
+               smt.close();
+               c.close();
+               return new VotesPair(new int[]{0},-1);
+            }
+            int[] votes= new int[5];
+            for(int i=0;i<5;i++){
+                r= smt.executeQuery("Select Count(*) as count From Vote WHERE Character='"+character+"' AND VoteNum="+(i+1)+";");
+                while(r.next()){
+                  votes[i]= (r.getInt("count"));
+               }
+            } 
+            smt.close(); 
+            return new VotesPair(votes,getAverage(character));
+         }
+         catch(Exception e){ 
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return new VotesPair(new int[]{0},-1);}
+      }
 
    
   public static void main( String args[] ) throws Exception{
@@ -145,7 +274,10 @@ public class ProjectDB {
    catch(Exception e){System.out.println("Oops...");} **/
    
    //System.out.println(checkVote("Test1",1).entrySet().toArray()[0]); 
-   System.out.println(getAverage(Integer.parseInt(args[0])));
+   
+   //System.out.println(modifyVote("Test1",1,1));
+   //System.out.println(getAverage(Integer.parseInt(args[0])));
 
+   System.out.println(Arrays.toString(getVotes(1).getVotes()));
    }
 }
