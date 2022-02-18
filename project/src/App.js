@@ -3,29 +3,37 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Character from './Character.jsx';
 import Home from './Home.jsx';
+import ChangeVote from './ChangeVote';
 
 function App() {
   console.log('hello from App!')
-  let chars=[['Lyn',0],['Hector',1],['Eliwood',2],['Florina',3],['Hawkeye',4]];
-  const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("/api")
+    fetch("/chars")
       .then((res) => res.json())
-      .then((data) => setData(data.message));
+      .then((data) =>{ 
+        setData(data.source.characters)
+        console.log('hello there!', {data})
+      });
   }, []);
   console.log(data)
+  
   return (
     <div className="App">
-    <Router>
-    
-      <Switch>
-        <Route exact path="/" render={(props)=><Home chars={chars}></Home>}/>
-        {chars.map(char=>{ return <Route exact path={"/" + char[1]} key={char} render={(props)=><Character character={char[1]} />} />})}
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Home chars={data} />} />
 
-      </Switch>
-    
-    </Router>
+          {data.map(char => 
+            <Route exact path={"/" + char.name} key={char.name} render={(props)=>
+              <Character character={char} />
+            } />
+          )}
+          {data.map(char => <Route exact path={"/vote/" + char.index} key={char.index} render={(props)=><ChangeVote character={char.index} />} />)}
+        </Switch>
+      
+      </Router>
     
     </div>
   );

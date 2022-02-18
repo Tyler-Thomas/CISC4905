@@ -3,24 +3,13 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import Selector from './Selector';
 
-class Home extends Component{
-    constructor(props){
-        super(props)
-        this.state={ chars:this.props.chars }
-    }
-
-render(){
-    console.log('Home')
-    return(
+const Home = ({ chars }) => {
+    return (
         <div className="Home">
-        
-            {(this.state.chars).map(char=>{ return <div key={char}><Selector character={char}/></div>})}
-            
-            
+            <h1>Hello from Home</h1>
+            {chars.map(char => <div key={char}><Selector character={char.name} /></div>)}
         </div>
     );
-}
-
 }
 
 export default Home;
