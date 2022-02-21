@@ -257,15 +257,19 @@ let src={
         },
         
     ],
-    addUser:(us,pwd)=>{users.push({username:us,password:pwd,userVotes:[]}); userList.push(us);},
+    
+}
+
+let inserts={
+    addUser:(us,pwd)=>{src.users.push({username:us,password:pwd,userVotes:[]}); src.userList.push(us);},
     addVote:(us,ch,val)=>{
-        let index=userList.indexOf(us);
-        users[index].userVotes.push(votes.length);
-        characters[ch].charVotes.push(votes.length);
-        votes.push({index:votes.length,user:us,character:ch,value:val});
+        let index=src.userList.indexOf(us);
+        src.users[index].userVotes.push(votes.length);
+        src.characters[ch].charVotes.push(votes.length);
+        src.votes.push({index:votes.length,user:us,character:ch,value:val});
         
 
     }
 }
 
-module.exports={src};
+module.exports={src,inserts};

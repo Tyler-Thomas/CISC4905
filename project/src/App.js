@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Character from './Character.jsx';
 import Home from './Home.jsx';
 import ChangeVote from './ChangeVote';
+import Signup from './Signup';
 
 function App() {
   console.log('hello from App!')
@@ -31,6 +32,7 @@ function App() {
             } />
           )}
           {data.map(char => <Route exact path={"/vote/" + char.index} key={char.index} render={(props)=><ChangeVote character={char.index} />} />)}
+          <Route exact path= "/signup" render={() => <Signup/>}/>
         </Switch>
       
       </Router>
