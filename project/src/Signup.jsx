@@ -5,20 +5,21 @@ const  Signup = () =>{
 
     const[usr, setUser]=React.useState('horse');
     const[pwd,setPwd]=React.useState('horse');
-    const addUser = (user,pawd) =>{
-        
+    const addUser =  (event) =>{
+        event.preventDefault();
         try{
-        fetch("/users", {
+        const res= fetch("/users", {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
+              
             },
-            body: JSON.stringify({usr:user, pwd:pawd}),
+            body: JSON.stringify({usr:usr, pwd:pwd}),
           })
-          .then((response) => response.json())
-          .then((data) => {console.log({data})})
-        }
+          .then((response) => response.text())
+          .then((data) => {console.log(data)})
         
+          }
         catch(err){console.log(err.message)}
     }
     
@@ -29,7 +30,7 @@ const  Signup = () =>{
         setPwd(event.target.value);
     }
     return(
-        <form onSubmit={()=>addUser(usr,pwd)}>
+        <form onSubmit={addUser}>
         <label>
             Username:
           <textarea value={usr} onChange={(handleUserChange)} />

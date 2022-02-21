@@ -14,9 +14,13 @@ app.get("/chars", (req, res) => {
 
 app.put("/users",(req,res) => {
   console.log(req.body);
-  if(src.userList.includes(req.body.usr))
+  if(src.userList.includes(req.body.usr)){
+  res.status(200).send('-1');
   return -1;
+  }
   inserts.addUser(req.body.usr,req.body.pwd);
+  console.log(src.userList);
+  res.status(200).send('0');
   return 0;
 });
 
