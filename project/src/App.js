@@ -5,8 +5,9 @@ import Character from './Character.jsx';
 import Home from './Home.jsx';
 import ChangeVote from './ChangeVote';
 import Signup from './Signup';
+import Login from './Login.jsx';
 
-function App() {
+function App(props) {
   console.log('hello from App!')
   const [data, setData] = React.useState([]);
 
@@ -32,7 +33,8 @@ function App() {
             } />
           )}
           {data.map(char => <Route exact path={"/vote/" + char.index} key={char.index} render={(props)=><ChangeVote character={char.index} />} />)}
-          <Route exact path= "/signup" render={() => <Signup/>}/>
+          <Route exact path= "/signup" render={routeProps => <Signup{...props}{...routeProps}/>}/>
+          <Route exact path= "/login" render={routeProps => <Login{...props}{...routeProps}/>}/>
         </Switch>
       
       </Router>

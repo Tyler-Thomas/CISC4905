@@ -263,11 +263,20 @@ let src={
 let inserts={
     addUser:(us,pwd)=>{src.users.push({username:us,password:pwd,userVotes:[]}); src.userList.push(us);},
     addVote:(us,ch,val)=>{
+        let a=true;
+        for(let i=0;i<src.characters[ch-1].charVotes.length;i++){
+            if(src.votes[src.characters[ch-1].charVotes[i]].user===us){
+                a=false;
+                src.votes[src.characters[ch-1].charVotes[i]].value=val;
+                i=src.characters[ch-1].charVotes.length;
+            }
+        }
+        if(a){
         let index=src.userList.indexOf(us);
-        src.users[index].userVotes.push(votes.length);
-        src.characters[ch].charVotes.push(votes.length);
-        src.votes.push({index:votes.length,user:us,character:ch,value:val});
-        
+        src.users[index].userVotes.push(src.votes.length);
+        src.characters[ch-1].charVotes.push(src.votes.length);
+        src.votes.push({index:src.votes.length,user:us,character:ch,value:val});
+        }
 
     }
 }

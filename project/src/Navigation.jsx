@@ -15,7 +15,7 @@ function Navigation(){
                 return (
                     
                     <NavbarBrand>
-                    <Button onClick={()=>{setUser('Jerry');}}>Logout</Button>
+                    <Button onClick={()=>{setUser('User');}}>Logout</Button>
                     </NavbarBrand>
                 )
             }
