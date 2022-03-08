@@ -32,7 +32,7 @@ function App(props) {
               <Character character={char} />
             } />
           )}
-          {data.map(char => <Route exact path={"/vote/" + char.index} key={char.index} render={(props)=><ChangeVote character={char.index} />} />)}
+          {data.map(char => <Route exact path={"/vote/" + char.index} key={char.index} render={(props)=><ChangeVote character={char} />} />)}
           <Route exact path= "/signup" render={routeProps => <Signup{...props}{...routeProps}/>}/>
           <Route exact path= "/login" render={routeProps => <Login{...props}{...routeProps}/>}/>
         </Switch>

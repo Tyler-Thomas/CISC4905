@@ -9,12 +9,12 @@ function Navigation(){
     const contextValue = { user, setUser };
         const loginLink=(user, setUser)=>{
             if(user==='User'){
-                return <Navbar.Brand href="/login">Login</Navbar.Brand>
+                return <Navbar.Brand className="LoginLink" href="/login">Login</Navbar.Brand>
             }
             else{
                 return (
                     
-                    <NavbarBrand>
+                    <NavbarBrand className="LoginLink">
                     <Button onClick={()=>{setUser('User');}}>Logout</Button>
                     </NavbarBrand>
                 )
@@ -26,11 +26,11 @@ function Navigation(){
                {({user,setUser})=>{
                     return (
             <div className='Nav'>
-                <Navbar>
-                <Navbar.Brand href="/">Home</Navbar.Brand>
-                <Navbar.Toggle />
+                <Navbar className='Navs'>
+                <Navbar.Brand className='NavHome' href="/">Home</Navbar.Brand>
+                
                 <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>
+                    <Navbar.Text className='NavText'>
                            Hello {user}
                     </Navbar.Text>
                 </Navbar.Collapse>

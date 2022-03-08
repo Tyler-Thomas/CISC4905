@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Navigation from './Navigation';
 import { useStorageState, login } from './login';
+import './App.css';
 
 
 const ChangeVote=({character})=>{
@@ -27,7 +28,7 @@ const ChangeVote=({character})=>{
           .then((res) => res.json())
           .then((data) =>({ 
                 votes:data.source.votes,
-                charVotes:data.source.chars[character-1].charVotes,
+                charVotes:data.source.chars[character.index-1].charVotes,
                 userVotes:user==='User'?[]:data.source.users[data.source.userList.indexOf(user)].userVotes
                  }))
                 .then(data=>{
@@ -53,7 +54,7 @@ const ChangeVote=({character})=>{
               'Content-Type': 'application/json',
               
             },
-            body: JSON.stringify({usr:user, ch:character, vote:vote}),
+            body: JSON.stringify({usr:user, ch:character.index, vote:vote}),
           })
           .then((response) => response.text())
           .then((data)=>{
@@ -97,9 +98,14 @@ const ChangeVote=({character})=>{
 
     
         return(
-            <div>
+            <div className='Char'>
             <Navigation/>
-            {character}
+            <div className='charName'>
+            {character.name}
+            <div className='PorBox'>
+            <img className='Portrait' id={`imgs2${character.name}`} src={`./4905images/${character.name}.png`} alt='No portrait'/>  
+            </div>     
+             </div>
             {msg}
             </div>
         )

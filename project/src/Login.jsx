@@ -35,8 +35,9 @@ const  Signup = ({history}) =>{
     setPwd(event.target.value);
     }
   return(
-    <div>
-    <form onSubmit={checkLogin}>
+    <div className='LoginDiv'>
+    <div className='FormDiv'>
+    <form className='form' onSubmit={checkLogin}>
     <label>
         Username:
       <textarea value={user} onChange={(handleUserChange)} />
@@ -47,6 +48,7 @@ const  Signup = ({history}) =>{
     </label>
     <input type="submit" value="Submit" />
   </form>
+  </div>
   {msg}
   </div>
   );

@@ -22,7 +22,7 @@ const Selector = ({ character }) =>  {
                 </div>
 
                 <div className='img'>
-                    <img className='Portrait' id="imgs" src={charImage} alt='No portrait'/>
+                    <img className='Portrait' id={`imgs${character}`} src={charImage} alt='No portrait'/>
                 </div>
         </div>
     );
