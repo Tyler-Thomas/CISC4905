@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Navigation from './Navigation';
+import { Link } from 'react-router-dom';
 import { useStorageState, login } from './login';
 import './App.css';
 
@@ -46,7 +47,7 @@ const ChangeVote=({character})=>{
     let msg2=vote===0?<p>You have not cast a vote for this character yet.</p>:<p>Your vote: {vote}</p>;
     let msg;
     const submitVote=(event)=>{
-        event.preventDefault();
+        //event.preventDefault();
         try{
          fetch("/votes", {
             method: 'PUT',
@@ -60,6 +61,7 @@ const ChangeVote=({character})=>{
           .then((data)=>{
               console.log(data);
           })
+          
         }
         catch(err){console.log(err.message)}
     }
@@ -100,6 +102,11 @@ const ChangeVote=({character})=>{
         return(
             <div className='Char'>
             <Navigation/>
+            <div className='backbutton'>
+           <Link className='back' to={`/${character.name}`}>
+            <button className="backb">Back</button>
+          </Link>
+        </div>
             <div className='charName'>
             {character.name}
             <div className='PorBox'>

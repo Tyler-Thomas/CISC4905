@@ -1,4 +1,5 @@
 import React, {Component, useContext, useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import { Router, Redirect, withRouter } from 'react-router';
 import { useStorageState, login } from './login';
 
@@ -6,7 +7,7 @@ const  Signup = ({history}) =>{
 
     const[usr, setUser]=React.useState('horse');
     const[pwd,setPwd]=React.useState('horse');
-    const[msg,setMSG]=React.useState(<p/>)
+    const[msg,setMSG]=React.useState(<p>Already have an account? <Link to="login">Login.</Link></p>)
     const addUser =  (event) =>{
         event.preventDefault();
         try{
