@@ -27,7 +27,7 @@ db.serialize(()=>{
       throw err;
     }
     rows.forEach((row) => {
-      inserts.addVote(row.User,row.Character,row.VoteNum);    
+      inserts.addVote(row.User,row.Character,row.VoteNum,row.Comment);    
     });
   });});
 db.close((err) => {
@@ -78,7 +78,7 @@ app.put("/users",(req,res) => {
   return 0;
 });
 app.put("/votes",(req,res)=>{
-  inserts.addVote(req.body.usr,req.body.ch,req.body.vote);
+  inserts.addVote(req.body.usr,req.body.ch,req.body.vote,req.body.comm);
   db =  new sqlite3.Database('server/FECommunityTierLists.db', sqlite3.OPEN_READWRITE ,(err) => {
     if (err) {
       throw err;
@@ -86,7 +86,7 @@ app.put("/votes",(req,res)=>{
     console.log('Connected to the database from /votes.');
   });
   db.serialize(()=>{
-    db.run(`Insert into Vote(Character,User,VoteNum) Values('${req.body.ch}','${req.body.usr}','${req.body.vote}')`,[],function(err) {
+    db.run(`Insert into Vote(Character,User,VoteNum,Comment) Values('${req.body.ch}','${req.body.usr}','${req.body.vote}','${req.body.comm}')`,[],function(err) {
       if (err) {
         return console.log(err.message);
       }

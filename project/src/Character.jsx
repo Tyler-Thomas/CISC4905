@@ -7,6 +7,7 @@ import Navigation from './Navigation';
 
 const Character=({character})=> {
   const [votes,setVotes]=React.useState({charVotes:[]});
+  const [comments,setComments]=React.useState([]);
   const [distr, setDistr]=React.useState([0,0,0,0,0,0]);
   let stats=[0,0,0,0,0,0];
   let sum=0;
@@ -19,8 +20,10 @@ const Character=({character})=> {
              }))
             .then(data=>{
         console.log(data);
+        let c=[];
         for(let i=0;i<data.charVotes.length;i++){
             stats[data.votes[data.charVotes[i]].value-1]++;
+            c.push({user:data.votes[data.charVotes[i]].user,comment:data.votes[data.charVotes[i]].comment});
             sum+=data.votes[data.charVotes[i]].value;
             console.log(sum);
         }
@@ -28,6 +31,7 @@ const Character=({character})=> {
         stats[5]=sum/data.charVotes.length;
         console.log(stats)
         setDistr(stats);
+        setComments(c);
         setVotes(data);
         console.log(stats);
         
@@ -61,6 +65,7 @@ const Character=({character})=> {
             Your Vote
           </Link>
         </div>
+        {comments.map(vote => <div>{vote.comment===null||vote.comment===''?<p/>:<p>{vote.user}</p>}<p>{vote.comment}</p></div>)}
       </div>
     );
   }
