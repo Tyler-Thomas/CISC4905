@@ -86,7 +86,7 @@ app.put("/votes",(req,res)=>{
     console.log('Connected to the database from /votes.');
   });
   db.serialize(()=>{
-    db.run(`Insert into Vote(Character,User,VoteNum,Comment) Values('${req.body.ch}','${req.body.usr}','${req.body.vote}','${req.body.comm}')`,[],function(err) {
+    db.run(src.query,[],function(err) {
       if (err) {
         return console.log(err.message);
       }
