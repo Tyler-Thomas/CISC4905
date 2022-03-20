@@ -11,8 +11,9 @@ if (process.env.NODE_ENV === 'production') {
 
   
   
+  const path = require('path');
   app.get('*', (req, res) => {
-    res.sendFile('CISC4905/project/build/index.html', { root: '/app'});
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 let db =  new sqlite3.Database('server/FECommunityTierLists.db', sqlite3.OPEN_READWRITE ,(err) => {
