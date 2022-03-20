@@ -1,7 +1,7 @@
 
 const sqlite3 = require('sqlite3').verbose();
 const express = require("express");
-const {src,inserts} = require('./server/database.js');
+const {src,inserts} = require('./database.js');
 const PORT = process.env.PORT || 5001;
 
 const app = express();
