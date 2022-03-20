@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
   
   
   app.get('*', (req, res) => {
-    res.sendFile(__dirname+'/CISC4905/project/build/index.html');
+    res.sendFile('/app/project/build/index.html');
   });
 }
 let db =  new sqlite3.Database('server/FECommunityTierLists.db', sqlite3.OPEN_READWRITE ,(err) => {
