@@ -5,7 +5,16 @@ const {src,inserts} = require('./database.js');
 const PORT = process.env.PORT || 5001;
 
 const app = express();
+if (process.env.NODE_ENV === 'production') {
+  
+  app.use(express.static('project/build'));
 
+  
+  
+  app.get('*', (req, res) => {
+    res.sendFile('./project/build/index.html');
+  });
+}
 let db =  new sqlite3.Database('server/FECommunityTierLists.db', sqlite3.OPEN_READWRITE ,(err) => {
   if (err) {
     throw err;
