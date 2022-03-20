@@ -12,6 +12,20 @@ if (process.env.NODE_ENV === 'production') {
   
   
   const path = require('path');
+  app.get("/chars", (req, res) => {
+    res.json({source:src});
+ });
+ app.get("/login",(req,res)=>{
+   res.json({source:{users:src.users,userlist:src.userList}})
+ });
+ app.get(`/votes`,(req,res)=>{
+   res.json({source:{
+     votes:src.votes,
+     chars:src.characters,
+     users:src.users,
+     userList:src.userList
+   }})
+ })
   app.get('*', (req, res) => {
     res.sendFile(path.resolve( 'project', 'build', 'index.html'));
   });
