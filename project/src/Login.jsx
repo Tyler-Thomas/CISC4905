@@ -10,7 +10,7 @@ const  Signup = ({history}) =>{
     const[msg,setMSG]=React.useState(<p>Don't have an account? <Link to="signup">Create One.</Link></p>);
     const [usr, setUsr] = useStorageState('User', 'user-context');
     React.useEffect(() => {
-         fetch("/Login")
+         fetch("/Log")
           .then((res) => res.json())
           .then((data) =>{ 
            setData(data.source)
