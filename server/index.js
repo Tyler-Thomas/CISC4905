@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'production') {
   
   const path = require('path');
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve('app', 'project', 'build', 'index.html'));
   });
 }
 let db =  new sqlite3.Database('server/FECommunityTierLists.db', sqlite3.OPEN_READWRITE ,(err) => {
