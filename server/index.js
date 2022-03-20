@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get("/chars", (req, res) => {
     res.json({source:src});
  });
- app.get("/Log",(req,res)=>{
+ app.get("/users",(req,res)=>{
    res.json({source:{users:src.users,userlist:src.userList}})
  });
  app.get(`/votes`,(req,res)=>{
@@ -65,7 +65,7 @@ app.use(express.urlencoded());
 app.get("/chars", (req, res) => {
    res.json({source:src});
 });
-app.get("/Log",(req,res)=>{
+app.get("/users",(req,res)=>{
   res.json({source:{users:src.users,userlist:src.userList}})
 });
 app.get(`/votes`,(req,res)=>{
