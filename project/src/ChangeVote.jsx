@@ -10,21 +10,22 @@ const ChangeVote=({character})=>{
     const [vote, setVote]= React.useState(0);
     const [comment, setComment]=React.useState('')
     const [voteBase, setvoteBase]=React.useState({votes:[],charVotes:[],userVotes:[]});
-    const includesArr=(arr1,arr2)=>{
+    /*const includesArr=(arr1,arr2)=>{
         for(let i=0; i<arr1.length; i++){
-            let arr= arr1[i]
-        if(arr.length!==arr2.length)
-        continue;
-        let a=true;
-        for(let i=0;i<arr.length;i++){
-            if (arr[i]!==arr2[i])
-            a=false;
+            let arr= arr1[i];
+            if(arr.length!==arr2.length)
+                continue;
+            let a=true;
+            for(let i=0;i<arr.length;i++){
+                 if (arr[i]!==arr2[i])
+                     a=false;
+            }
+             if(a)
+                 return true;
         }
-        if(a)
-        return true;
-    }
         return false;
     }
+    */
     React.useEffect(() => {
         fetch('/votes')
           .then((res) => res.json())
@@ -36,7 +37,7 @@ const ChangeVote=({character})=>{
                 .then(data=>{
             console.log(data);
             for(let i=0;i<data.charVotes.length;i++){
-                if(includesArr(data.userVotes,data.charVotes[i])){
+                if(data.userVotes.includes(data.charVotes[i])){
                     setVote(data.votes[data.charVotes[i]].value);
                     setComment(data.votes[data.charVotes[i]].comment);
                     i=data.charVotes.length;
@@ -95,7 +96,7 @@ const ChangeVote=({character})=>{
             <label>
                 5
                 <input type='radio' value={5} checked={vote===5} onChange={()=>setVote(5)}/>
-            </label>
+            </label><br/>
             <label>
                 Comment:
                 <textarea value={comment} onChange={(handleCommentChange)} />

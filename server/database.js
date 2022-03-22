@@ -268,7 +268,8 @@ let inserts={
         for(let i=0;i<src.characters[ch-1].charVotes.length;i++){
             if(src.votes[src.characters[ch-1].charVotes[i]].user===us){
                 a=false;
-                src.query=`Update Vote Set VoteNum='${val}', Comment='${comm}' Where Character='${ch}' AND User='${us}'`
+                //src.query=`Update Vote Set VoteNum='${val}', Comment='${comm}' Where Character='${ch}' AND User='${us}'`
+                src.query='Update Vote Set VoteNum=$1, Comment=$2 Where Character=$3 AND Username=$4'
                 src.votes[src.characters[ch-1].charVotes[i]].value=val;
                 src.votes[src.characters[ch-1].charVotes[i]].comment=comm;
                 i=src.characters[ch-1].charVotes.length;
@@ -279,7 +280,8 @@ let inserts={
         src.users[index].userVotes.push(src.votes.length);
         src.characters[ch-1].charVotes.push(src.votes.length);
         src.votes.push({index:src.votes.length,user:us,character:ch,value:val,comment:comm});
-        src.query=`Insert into Vote(Character,User,VoteNum,Comment) Values('${ch}','${us}','${val}','${comm}')`
+        //src.query=`Insert into Vote(Character,User,VoteNum,Comment) Values('${ch}','${us}','${val}','${comm}')`
+        src.query='Insert into Vote(VoteNum,Comment,Character,Username) Values($1,$2,$3,$4)'
         }
 
     }

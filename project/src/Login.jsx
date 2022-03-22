@@ -40,11 +40,11 @@ const  Signup = ({history}) =>{
     <form className='form' onSubmit={checkLogin}>
     <label>
         Username:
-      <textarea value={user} onChange={(handleUserChange)} />
+      <input value={user} onChange={(handleUserChange)} />
     </label>
     <label>
         Password:
-        <textarea value={pwd} onChange={handlePassChange} />
+        <input type='password' value={pwd} onChange={handlePassChange} />
     </label>
     <input type="submit" value="Submit" />
   </form>
