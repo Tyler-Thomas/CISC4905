@@ -14,8 +14,8 @@ function Navigation(){
             else{
                 return (
                     
-                    <NavbarBrand className="LoginLink">
-                    <Button onClick={()=>{setUser('User');}}><Link to="/">Logout</Link></Button>
+                    <NavbarBrand className="LoginButton">
+                    <Button className="logout" onClick={()=>{setUser('User');}}><Link to="/">Logout</Link></Button>
                     </NavbarBrand>
                 )
             }

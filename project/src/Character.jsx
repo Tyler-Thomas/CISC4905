@@ -23,7 +23,7 @@ const Character=({character})=> {
         let c=[];
         for(let i=0;i<data.charVotes.length;i++){
             stats[data.votes[data.charVotes[i]].value-1]++;
-            c.push({user:data.votes[data.charVotes[i]].user,comment:data.votes[data.charVotes[i]].comment});
+            c.push({user:data.votes[data.charVotes[i]].user,comment:data.votes[data.charVotes[i]].comment,value:data.votes[data.charVotes[i]].value});
             sum+=data.votes[data.charVotes[i]].value;
             console.log(sum);
         }
@@ -53,19 +53,21 @@ const Character=({character})=> {
           </div>     
         </div>
         <div className='histogram'>
-          <div className='histobox' style={{ height: `${distr[0]/votes.charVotes.length*50}%`, backgroundColor: 'red' }}>1</div>
-          <div className='histobox' style={{ height: `${distr[1]/votes.charVotes.length*50}%`, backgroundColor: 'orange' }}>2</div>
-          <div className='histobox' style={{ height: `${distr[2]/votes.charVotes.length*50}%`, backgroundColor: 'yellow' }}>3</div>
-          <div className='histobox' style={{ height: `${distr[3]/votes.charVotes.length*50}%`, backgroundColor: 'green' }}>4</div>
-          <div className='histobox' style={{ height: `${distr[4]/votes.charVotes.length*50}%`, backgroundColor: 'blue' }}>5</div>
-          <div className='AVG'>Average: {distr[5]}</div>
+          <div className='histobox' style={{ height: `${distr[0]/votes.charVotes.length*63}%`, backgroundColor: 'red' }}>1</div>
+          <div className='histobox' style={{ height: `${distr[1]/votes.charVotes.length*63}%`, backgroundColor: 'orange' }}>2</div>
+          <div className='histobox' style={{ height: `${distr[2]/votes.charVotes.length*63}%`, backgroundColor: 'yellow' }}>3</div>
+          <div className='histobox' style={{ height: `${distr[3]/votes.charVotes.length*63}%`, backgroundColor: 'green' }}>4</div>
+          <div className='histobox' style={{ height: `${distr[4]/votes.charVotes.length*63}%`, backgroundColor: 'blue' }}>5</div>
+          
+          
         </div>
+        <div className='AVG'>Average: {distr[5]}</div>
         <div className='VoteLink'>
           <Link to={'/vote/' + character.index}>
             Your Vote
           </Link>
         </div>
-        {comments.map(vote => <div>{vote.comment===null||vote.comment===''?<p/>:<p>{vote.user}</p>}<p>{vote.comment}</p></div>)}
+        {comments.map(vote => <div>{vote.comment===null||vote.comment===''?<p/>:<div className='userComment'><p className='user'>{vote.user}-----{vote.value}</p><p className='comment'>{vote.comment}</p></div>}</div>)}
       </div>
     );
   }
