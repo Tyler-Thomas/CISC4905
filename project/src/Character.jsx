@@ -53,11 +53,11 @@ const Character=({character})=> {
           </div>     
         </div>
         <div className='histogram'>
-          <div className='histobox' style={{ height: `${distr[0]/votes.charVotes.length*63}%`, backgroundColor: 'red' }}>1</div>
-          <div className='histobox' style={{ height: `${distr[1]/votes.charVotes.length*63}%`, backgroundColor: 'orange' }}>2</div>
-          <div className='histobox' style={{ height: `${distr[2]/votes.charVotes.length*63}%`, backgroundColor: 'yellow' }}>3</div>
-          <div className='histobox' style={{ height: `${distr[3]/votes.charVotes.length*63}%`, backgroundColor: 'green' }}>4</div>
-          <div className='histobox' style={{ height: `${distr[4]/votes.charVotes.length*63}%`, backgroundColor: 'blue' }}>5</div>
+          <div className='histobox' style={{ height: `${distr[0]/votes.charVotes.length*80}%`, backgroundColor: 'red' }}>1</div>
+          <div className='histobox' style={{ height: `${distr[1]/votes.charVotes.length*80}%`, backgroundColor: 'orange' }}>2</div>
+          <div className='histobox' style={{ height: `${distr[2]/votes.charVotes.length*80}%`, backgroundColor: 'yellow' }}>3</div>
+          <div className='histobox' style={{ height: `${distr[3]/votes.charVotes.length*80}%`, backgroundColor: 'green' }}>4</div>
+          <div className='histobox' style={{ height: `${distr[4]/votes.charVotes.length*80}%`, backgroundColor: 'blue' }}>5</div>
           
           
         </div>
